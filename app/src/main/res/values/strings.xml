@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">New City Time Trial Timing</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="StartEventButtonText">Start Event</string>
+    <string name="title_activity_manage_riders">Manage Riders</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_new_event">Create New Event</string>
+    <string name="NewEventText">New Event</string>
+    <string name="ManageRidersText">Manage Rider</string>
+    <string name="AddRiderText">Add Rider</string>
+    <string name="title_activity_add_new_rider">AddNewRiderActivity</string>
+    <string name="FirstNameString">First Name</string>
+    <string name="LastNameString">Last Name</string>
+    <string name="AddNewRiderString">Add New Rider</string>
+    <string name="BeepBtnText">Beep!</string>
+    <string name="riderNumber">Rider Number</string>
+    <string name="beepText">beep</string>
+    <string name="AddNewRider">Add New Rider</string>
+</resources>
