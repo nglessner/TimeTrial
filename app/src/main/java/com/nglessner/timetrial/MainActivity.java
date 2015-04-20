@@ -1,6 +1,7 @@
 package com.nglessner.timetrial;
 
 import android.app.Activity;
+import android.media.MediaPlayer;
 import android.support.v7.app.ActionBarActivity;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
@@ -13,6 +14,7 @@ import android.widget.Button;
 public class MainActivity extends ActionBarActivity{
 
     public static SQLiteDatabase db;
+    MediaPlayer mediaPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +26,6 @@ public class MainActivity extends ActionBarActivity{
         db.execSQL("CREATE TABLE IF NOT EXISTS race(raceId INT, riderId INT, courseId INT, eventDate VARCHAR, time VARCHAR, PRIMARY KEY(raceId));");
         db.execSQL("CREATE TABLE IF NOT EXISTS course(courseId INT, distance REAL, courseName VARCHAR, PRIMARY KEY(courseId));");
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -47,5 +48,26 @@ public class MainActivity extends ActionBarActivity{
         }
 
         startActivity(intent);
+    }
+
+    public void beep(View view) {
+        mediaPlayer = MediaPlayer.create(this, R.raw.startgate);
+        mediaPlayer.start();
+    }
+    private MediaPlayer.OnCompletionListener onCompletionListener = new MediaPlayer.OnCompletionListener() {
+
+        @Override
+        public void onCompletion(MediaPlayer mp) {
+            mediaPlayer.release();
+            mediaPlayer = null;
+        }
+    };
+
+    @Override
+    protected void onDestroy() {
+        if(null!=mediaPlayer){
+            mediaPlayer.release();
+        }
+        super.onDestroy();
     }
 }

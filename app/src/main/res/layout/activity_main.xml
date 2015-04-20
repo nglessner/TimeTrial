@@ -21,9 +21,19 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/StartEventButtonText"
+            android:text="@string/newEventButtonText"
             android:id="@+id/button1"
             android:layout_column="3"
             android:onClick="startAction"/>
+    </TableRow>
+    <TableRow>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/BeepBtnText"
+            android:id="@+id/beepButton"
+            android:onClick="beep"
+            android:layout_column="3" />
     </TableRow>
 </TableLayout>

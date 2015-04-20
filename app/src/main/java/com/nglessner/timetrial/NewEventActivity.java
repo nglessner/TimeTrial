@@ -1,26 +1,41 @@
 package com.nglessner.timetrial;
 
 import android.content.Context;
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 
 public class NewEventActivity extends ActionBarActivity {
-
-    MediaPlayer mediaPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_event);
-    }
 
+        ArrayList<String> riderStringList = new ArrayList<>();
+
+        riderStringList.add("Rider1 (#1)");
+        riderStringList.add("Rider2 (#2)");
+        riderStringList.add("Rider3 (#3)");
+
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
+                this,
+                R.layout.listitem,
+                riderStringList);
+
+        ListView lv = (ListView) findViewById(R.id.EventRiderList);
+        lv.setAdapter(arrayAdapter);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -29,27 +44,8 @@ public class NewEventActivity extends ActionBarActivity {
         return true;
     }
 
-    public void beep(View view) {
-        Context context = this.getApplicationContext();
-
-        Uri mp3 = Uri.parse("android.resource://"
-                + context.getPackageName() + "/raw/startgate");
-
-        try {
-            MediaPlayer mediaPlayer = MediaPlayer.create(context, R.raw.startgate);
-            mediaPlayer.prepare();
-            mediaPlayer.start();
-        }
-        catch (IOException e) {
-        }
+    public void startEvent(View view) {
+        Intent intent = new Intent(this, EventActivity.class);
+        startActivity(intent);
     }
-    private MediaPlayer.OnCompletionListener onCompletionListener = new MediaPlayer.OnCompletionListener() {
-
-        @Override
-        public void onCompletion(MediaPlayer mp) {
-            mediaPlayer.release();
-            mediaPlayer = null;
-        }
-    };
-
 }

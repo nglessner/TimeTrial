@@ -40,6 +40,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.nglessner.timetrial.MainActivity" />
         </activity>
+        <activity
+            android:name=".EventActivity"
+            android:label="@string/title_activity_event"
+            android:parentActivityName=".NewEventActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.nglessner.timetrial.NewEventActivity" />
+        </activity>
     </application>
 
 </manifest>
