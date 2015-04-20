@@ -13,7 +13,7 @@ import android.app.AlertDialog.Builder;
 
 public class AddNewRiderActivity extends ActionBarActivity {
 
-    EditText firstNameEditText,lastNameEditText,riderNumber;
+    EditText firstNameEditText,lastNameEditText,riderNumber,prTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +23,7 @@ public class AddNewRiderActivity extends ActionBarActivity {
         firstNameEditText=(EditText)findViewById(R.id.firstNameEditText);
         lastNameEditText=(EditText)findViewById(R.id.lastNameEditText);
         riderNumber=(EditText)findViewById(R.id.riderNumberEditText);
+		prTime=(EditText)findViewById(R.id.riderPRTimeEditText);
     }
 
     @Override
@@ -41,11 +42,11 @@ public class AddNewRiderActivity extends ActionBarActivity {
         {
             showMessage("Error", "Please enter all values");
             return;
-        }
+        }		
 
         // Inserting record
         try {
-            MainActivity.db.execSQL("INSERT INTO rider VALUES((SELECT Max(riderId)+ 1 from rider),'"
+            MainActivity.db.execSQL("INSERT INTO rider VALUES((SELECT MAX(riderId)+ 1 from rider),'"
                     + riderNumber.getText() + "','" + firstNameEditText.getText()
                     + "','" + lastNameEditText.getText() + "');");
 
@@ -53,6 +54,13 @@ public class AddNewRiderActivity extends ActionBarActivity {
         {
             showMessage("Error", "There was an error adding this rider, please try again.");
         }
+		
+		if(prTime.getText().toString().trim().length()!=0)
+		{
+		//TODO: insert record into race table for this rider
+		//race(raceId INT, riderId INT, courseId INT, eventDate VARCHAR, time VARCHAR)
+		//INSERT INTO race VALUES(
+		}		
 
         clearText();
         Intent intent = new Intent(this, ManageRidersActivity.class);

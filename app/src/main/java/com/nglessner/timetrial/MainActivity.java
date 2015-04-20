@@ -22,9 +22,9 @@ public class MainActivity extends ActionBarActivity{
         setContentView(R.layout.activity_main);
 
         db=openOrCreateDatabase("TimeTrialDB", Context.MODE_PRIVATE, null);
-        db.execSQL("CREATE TABLE IF NOT EXISTS `rider` (`riderId` INTEGER,`riderNumber` INTEGER NOT NULL UNIQUE, `firstName` INTEGER NOT NULL, `lastName` INTEGER NOT NULL, PRIMARY KEY(riderId));");
-        db.execSQL("CREATE TABLE IF NOT EXISTS race(raceId INT, riderId INT, courseId INT, eventDate VARCHAR, time VARCHAR, PRIMARY KEY(raceId));");
-        db.execSQL("CREATE TABLE IF NOT EXISTS course(courseId INT, distance REAL, courseName VARCHAR, PRIMARY KEY(courseId));");
+        db.execSQL("CREATE TABLE IF NOT EXISTS `rider` (`riderId` INTEGER,`riderNumber` INTEGER NOT NULL UNIQUE, `firstName` VARCHAR NOT NULL, `lastName` VARCHAR NOT NULL, PRIMARY KEY(riderId));");
+        db.execSQL("CREATE TABLE IF NOT EXISTS race(raceId INTEGER, riderId INTEGER NOT NULL, eventDate VARCHAR NOT NULL, time VARCHAR NOT NULL, PRIMARY KEY(raceId));");
+        //db.execSQL("CREATE TABLE IF NOT EXISTS course(courseId INT, distance REAL, courseName VARCHAR, PRIMARY KEY(courseId));");
     }
 
     @Override

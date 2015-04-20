@@ -31,6 +31,14 @@
         android:id="@+id/riderNumberEditText"
         android:layout_below="@+id/lastNameEditText"
         android:layout_alignParentEnd="true" />
+		
+	<EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:hint="PR Time"
+        android:id="@+id/riderPRTimeEditText"
+        android:layout_below="@+id/riderNumberEditText"
+        android:layout_alignParentEnd="true" />
 
     <Button
         android:layout_width="wrap_content"
