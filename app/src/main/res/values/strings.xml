@@ -8,7 +8,7 @@
     <string name="title_activity_new_event">Create New Event</string>
     <string name="NewEventText">New Event</string>
     <string name="ManageRidersText">Manage Rider</string>
-    <string name="AddRiderText">Add Rider</string>
+    <string name="AddRiderButtonText">New Rider</string>
     <string name="title_activity_add_new_rider">AddNewRiderActivity</string>
     <string name="FirstNameString">First Name</string>
     <string name="LastNameString">Last Name</string>
