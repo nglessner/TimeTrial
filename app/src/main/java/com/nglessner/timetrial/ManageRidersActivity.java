@@ -80,7 +80,7 @@ public class ManageRidersActivity extends ActionBarActivity {
     }
 
     public void deleteRider(int riderId) {
-        MainActivity.db.delete("rider", "riderId=?", new String[]{String.valueOf(riderId)});
+        MainActivity.db.delete("Rider", "RiderId=?", new String[]{String.valueOf(riderId)});
         RiderList = null;
         loadListView((ListView) findViewById(R.id.listView));
     }
@@ -110,7 +110,7 @@ public class ManageRidersActivity extends ActionBarActivity {
     private void populateRiderList() {
         if (RiderList == null || RiderList.size() == 0) {
             RiderList = new ArrayList<Rider>();
-            Cursor c = MainActivity.db.rawQuery("Select * from rider", null);
+            Cursor c = MainActivity.db.rawQuery("Select * from Rider", null);
 
             while (c.moveToNext()) {
                 Rider newRider = new Rider();

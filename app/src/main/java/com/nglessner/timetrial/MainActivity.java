@@ -22,9 +22,9 @@ public class MainActivity extends ActionBarActivity{
         setContentView(R.layout.activity_main);
 
         db=openOrCreateDatabase("TimeTrialDB", Context.MODE_PRIVATE, null);
-        db.execSQL("CREATE TABLE IF NOT EXISTS `rider` (`riderId` INTEGER,`riderNumber` INTEGER NOT NULL UNIQUE, `firstName` VARCHAR NOT NULL, `lastName` VARCHAR NOT NULL, PRIMARY KEY(riderId));");
-        db.execSQL("CREATE TABLE IF NOT EXISTS race(raceId INTEGER, riderId INTEGER NOT NULL, eventDate VARCHAR NOT NULL, time VARCHAR NOT NULL, PRIMARY KEY(raceId));");
-        //db.execSQL("CREATE TABLE IF NOT EXISTS course(courseId INT, distance REAL, courseName VARCHAR, PRIMARY KEY(courseId));");
+        db.execSQL("CREATE TABLE IF NOT EXISTS `Rider` (`RiderId` INTEGER,`RiderNumber` INTEGER NOT NULL UNIQUE, `FirstName` VARCHAR NOT NULL, `LastName` VARCHAR NOT NULL, PRIMARY KEY(RiderId));");
+        db.execSQL("CREATE TABLE IF NOT EXISTS `Race` (`RaceId`	INTEGER, `RiderId` INTEGER NOT NULL, `StartTime` TEXT NOT NULL, `EndTime` TEXT,`RaceTime` TEXT, `RacePace` TEXT, PRIMARY KEY(RaceId));");
+        db.execSQL("CREATE TABLE IF NOT EXISTS 'Event'('EventId' INTEGER, 'RaceId' INTEGER NOT NULL, Distance REAL, CourseName VARCHAR, PRIMARY KEY(EventId));");
     }
 
     @Override
@@ -54,6 +54,7 @@ public class MainActivity extends ActionBarActivity{
         mediaPlayer = MediaPlayer.create(this, R.raw.startgate);
         mediaPlayer.start();
     }
+
     private MediaPlayer.OnCompletionListener onCompletionListener = new MediaPlayer.OnCompletionListener() {
 
         @Override

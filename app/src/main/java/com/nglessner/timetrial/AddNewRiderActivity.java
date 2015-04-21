@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.app.AlertDialog.Builder;
 
+import java.util.StringTokenizer;
 
 
 public class AddNewRiderActivity extends ActionBarActivity {
@@ -38,15 +39,32 @@ public class AddNewRiderActivity extends ActionBarActivity {
 
         if(firstNameEditText.getText().toString().trim().length()==0||
                 lastNameEditText.getText().toString().trim().length()==0||
-                riderNumber.getText().toString().trim().length()==0)
+                riderNumber.getText().toString().trim().length()==0||
+                prTime.getText().toString().trim().length()==0)
         {
             showMessage("Error", "Please enter all values");
             return;
-        }		
+        }
+        int minutes = 0;
+        int seconds = 0;
+
+        try {
+            StringTokenizer tokens = new StringTokenizer(prTime.getText().toString(), ":");
+            if(tokens.countTokens() == 2)
+            {
+                minutes = Integer.parseInt(tokens.nextToken());
+                seconds = Integer.parseInt(tokens.nextToken());
+            }
+            else {
+                throw new NumberFormatException();
+            }
+        } catch (NumberFormatException e) {
+            showMessage("Error", "PR Time entered in an incorrect format. Use MM:SS");
+        }
 
         // Inserting record
         try {
-            MainActivity.db.execSQL("INSERT INTO rider VALUES((SELECT MAX(riderId)+ 1 from rider),'"
+            MainActivity.db.execSQL("INSERT INTO Rider VALUES((SELECT MAX(RiderId)+ 1 from Rider),'"
                     + riderNumber.getText() + "','" + firstNameEditText.getText()
                     + "','" + lastNameEditText.getText() + "');");
 
@@ -59,7 +77,9 @@ public class AddNewRiderActivity extends ActionBarActivity {
 		{
 		//TODO: insert record into race table for this rider
 		//race(raceId INT, riderId INT, courseId INT, eventDate VARCHAR, time VARCHAR)
-		//INSERT INTO race VALUES(
+        //    MainActivity.db.execSQL("INSERT INTO rider VALUES((SELECT MAX(riderId)+ 1 from rider),'"
+        //            + riderNumber.getText() + "','" + firstNameEditText.getText()
+        //            + "','" + lastNameEditText.getText() + "');");
 		}		
 
         clearText();
