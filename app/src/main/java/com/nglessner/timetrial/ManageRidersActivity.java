@@ -120,6 +120,7 @@ public class ManageRidersActivity extends ActionBarActivity {
                 newRider.LastName = c.getString(3);
                 RiderList.add(newRider);
             }
+            c.close();
         }
     }
 }

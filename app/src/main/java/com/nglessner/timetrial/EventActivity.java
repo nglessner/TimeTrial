@@ -2,7 +2,6 @@ package com.nglessner.timetrial;
 
 import android.os.CountDownTimer;
 import android.os.Handler;
-import android.os.SystemClock;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -10,13 +9,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import java.util.concurrent.TimeUnit;
-
 
 public class EventActivity extends ActionBarActivity {
 
-    private Button startButton;
-    private Button stopButton;
     private static final String FORMAT = "%02d:%02d:%02d";
 
     private TextView timerValue;
@@ -35,8 +30,8 @@ public class EventActivity extends ActionBarActivity {
         setContentView(R.layout.activity_event);
 
         timerValue = (TextView) findViewById(R.id.countDownText);
-        startButton = (Button) findViewById(R.id.countDownStart);
-        stopButton = (Button) findViewById(R.id.countDownStop);
+        Button startButton = (Button) findViewById(R.id.countDownStart);
+        Button stopButton = (Button) findViewById(R.id.countDownStop);
     }
 
 

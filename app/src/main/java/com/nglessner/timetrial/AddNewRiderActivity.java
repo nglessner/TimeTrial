@@ -1,6 +1,5 @@
 package com.nglessner.timetrial;
 
-import android.app.Notification;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
