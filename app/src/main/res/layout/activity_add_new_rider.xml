@@ -36,6 +36,8 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:hint="PR Time"
+        android:inputType="time"
+        android:ems="10"
         android:id="@+id/riderPRTimeEditText"
         android:layout_below="@+id/riderNumberEditText"
         android:layout_alignParentEnd="true" />
@@ -46,10 +48,26 @@
         android:text="@string/AddNewRiderString"
         android:onClick="addRider"
         android:id="@+id/addRiderSubmit"
-        android:layout_below="@+id/riderNumberEditText"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="55dp"
-        android:layout_alignParentEnd="false"
-        android:layout_alignParentStart="false" />
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+    <Spinner
+        android:layout_width="66dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinner"
+        android:spinnerMode="dropdown"
+        android:layout_below="@+id/riderPRTimeEditText"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="38dp" />
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinner2"
+        android:layout_alignTop="@+id/spinner"
+        android:layout_toEndOf="@+id/spinner"
+        android:layout_marginStart="50dp"
+        android:spinnerMode="dialog" />
+
 
 </RelativeLayout>

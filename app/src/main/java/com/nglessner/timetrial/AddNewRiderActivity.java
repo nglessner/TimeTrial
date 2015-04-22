@@ -5,8 +5,10 @@ import android.database.Cursor;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.View;
 import android.widget.EditText;
 import android.app.AlertDialog.Builder;
+import android.widget.TimePicker;
 
 import java.util.StringTokenizer;
 import java.util.concurrent.TimeUnit;
@@ -37,7 +39,7 @@ public class AddNewRiderActivity extends ActionBarActivity {
         return true;
     }
 
-    public void addRider() {
+    public void addRider(View view) {
         // Checking empty fields
         boolean goToManageRiders = true;
 
@@ -73,6 +75,7 @@ public class AddNewRiderActivity extends ActionBarActivity {
             // Inserting record
             try {
                 Cursor c = MainActivity.db.rawQuery("SELECT MAX(RiderId)+ 1 from Rider", null);
+                c.moveToFirst();
                 Integer riderId = c.getInt(0);
                 c.close();
 
