@@ -1,19 +1,23 @@
 package com.nglessner.timetrial;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.View;
 import android.widget.EditText;
 import android.app.AlertDialog.Builder;
 
 import java.util.StringTokenizer;
+import java.util.concurrent.TimeUnit;
 
 
 public class AddNewRiderActivity extends ActionBarActivity {
 
-    EditText firstNameEditText,lastNameEditText,riderNumber,prTime;
+    private EditText firstNameEditText;
+    private EditText lastNameEditText;
+    private EditText riderNumber;
+    private EditText prTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,60 +37,67 @@ public class AddNewRiderActivity extends ActionBarActivity {
         return true;
     }
 
-    public void addRider(View view) {
+    public void addRider() {
         // Checking empty fields
+        boolean goToManageRiders = true;
 
-        if(firstNameEditText.getText().toString().trim().length()==0||
-                lastNameEditText.getText().toString().trim().length()==0||
-                riderNumber.getText().toString().trim().length()==0||
-                prTime.getText().toString().trim().length()==0)
-        {
+        if (firstNameEditText.getText().toString().trim().length() == 0 ||
+                lastNameEditText.getText().toString().trim().length() == 0 ||
+                riderNumber.getText().toString().trim().length() == 0 ||
+                prTime.getText().toString().trim().length() == 0) {
             showMessage("Error", "Please enter all values");
-            return;
+            goToManageRiders = false;
         }
         int minutes = 0;
         int seconds = 0;
+        long milliseconds = 0;
 
-        try {
-            StringTokenizer tokens = new StringTokenizer(prTime.getText().toString(), ":");
-            if(tokens.countTokens() == 2)
-            {
-                minutes = Integer.parseInt(tokens.nextToken());
-                seconds = Integer.parseInt(tokens.nextToken());
+        if (goToManageRiders) {
+            try {
+                StringTokenizer tokens = new StringTokenizer(prTime.getText().toString(), ":");
+                if (tokens.countTokens() == 2) {
+                    minutes = Integer.parseInt(tokens.nextToken());
+                    seconds = Integer.parseInt(tokens.nextToken());
+                    milliseconds = TimeUnit.MINUTES.toMillis(minutes);
+                    milliseconds += TimeUnit.SECONDS.toMillis(seconds);
+                } else {
+                    throw new NumberFormatException();
+                }
+            } catch (Exception e) {
+                showMessage("Error", "PR Time entered in an incorrect format. Use MM:SS " + e.toString());
+                goToManageRiders = false;
             }
-            else {
-                throw new NumberFormatException();
-            }
-        } catch (NumberFormatException e) {
-            showMessage("Error", "PR Time entered in an incorrect format. Use MM:SS");
         }
 
-        // Inserting record
-        try {
-            MainActivity.db.execSQL("INSERT INTO Rider VALUES((SELECT MAX(RiderId)+ 1 from Rider),'"
-                    + riderNumber.getText() + "','" + firstNameEditText.getText()
-                    + "','" + lastNameEditText.getText() + "');");
+        if (goToManageRiders) {
+            // Inserting record
+            try {
+                Cursor c = MainActivity.db.rawQuery("SELECT MAX(RiderId)+ 1 from Rider", null);
+                Integer riderId = c.getInt(0);
+                c.close();
 
-        }catch (Exception e)
-        {
-            showMessage("Error", "There was an error adding this rider, please try again.");
+                MainActivity.db.execSQL("INSERT INTO Rider VALUES(" + riderId + ","
+                        + riderNumber.getText() + ",'" + firstNameEditText.getText()
+                        + "','" + lastNameEditText.getText() + "');");
+
+                MainActivity.db.execSQL("INSERT INTO Race VALUES((SELECT MAX(RaceId)+ 1 from Race),"
+                        + riderId + "," + null + "," + null + "," + null + "," + milliseconds
+                        + "," + null + ");");
+
+            } catch (Exception e) {
+                showMessage("Error", "There was an error adding this rider, please try again. " + e.toString());
+                goToManageRiders = false;
+            }
         }
-		
-		if(prTime.getText().toString().trim().length()!=0)
-		{
-		//TODO: insert record into race table for this rider
-		//race(raceId INT, riderId INT, courseId INT, eventDate VARCHAR, time VARCHAR)
-        //    MainActivity.db.execSQL("INSERT INTO rider VALUES((SELECT MAX(riderId)+ 1 from rider),'"
-        //            + riderNumber.getText() + "','" + firstNameEditText.getText()
-        //            + "','" + lastNameEditText.getText() + "');");
-		}		
 
-        clearText();
-        Intent intent = new Intent(this, ManageRidersActivity.class);
-        startActivity(intent);
+        if (goToManageRiders) {
+            clearText();
+            Intent intent = new Intent(this, ManageRidersActivity.class);
+            startActivity(intent);
+        }
     }
 
-    public void showMessage(String title,String message)
+    void showMessage(String title, String message)
     {
         Builder builder=new Builder(this);
         builder.setCancelable(true);
@@ -95,7 +106,7 @@ public class AddNewRiderActivity extends ActionBarActivity {
         builder.show();
     }
 
-    public void clearText()
+    void clearText()
     {
         firstNameEditText.setText("");
         lastNameEditText.setText("");

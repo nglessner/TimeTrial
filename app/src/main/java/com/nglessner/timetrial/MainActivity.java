@@ -22,7 +22,7 @@ public class MainActivity extends ActionBarActivity{
 
         db=openOrCreateDatabase("TimeTrialDB", Context.MODE_PRIVATE, null);
         db.execSQL("CREATE TABLE IF NOT EXISTS `Rider` (`RiderId` INTEGER,`RiderNumber` INTEGER NOT NULL UNIQUE, `FirstName` VARCHAR NOT NULL, `LastName` VARCHAR NOT NULL, PRIMARY KEY(RiderId));");
-        db.execSQL("CREATE TABLE IF NOT EXISTS `Race` (`RaceId`	INTEGER, `RiderId` INTEGER NOT NULL, `EventId` INTEGER, `StartTime` TEXT NOT NULL, `EndTime` TEXT,`RaceTime` TEXT, `RacePace` TEXT, PRIMARY KEY(RaceId));");
+        db.execSQL("CREATE TABLE IF NOT EXISTS `Race` (`RaceId`	INTEGER, `RiderId` INTEGER NOT NULL, `EventId` INTEGER, `StartTime` INTEGER, `EndTime` INTEGER,`RaceTime` INTEGER, `RacePace` INTEGER, PRIMARY KEY(RaceId));");
         db.execSQL("CREATE TABLE IF NOT EXISTS 'Event' (`EventId` INTEGER, `Distance` REAL, `CourseName` VARCHAR, PRIMARY KEY(EventId));");
     }
 
