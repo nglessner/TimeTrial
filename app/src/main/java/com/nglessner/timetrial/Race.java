@@ -8,6 +8,6 @@ public class Race {
     public int RiderId;
     public int StartTime;
     public int EndTime;
-    public int Time;
+    public long Time;
     public int MPH;
 }

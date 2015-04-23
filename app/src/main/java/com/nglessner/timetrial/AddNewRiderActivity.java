@@ -8,9 +8,8 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
 import android.app.AlertDialog.Builder;
-import android.widget.TimePicker;
+import android.widget.NumberPicker;
 
-import java.util.StringTokenizer;
 import java.util.concurrent.TimeUnit;
 
 
@@ -19,7 +18,8 @@ public class AddNewRiderActivity extends ActionBarActivity {
     private EditText firstNameEditText;
     private EditText lastNameEditText;
     private EditText riderNumber;
-    private EditText prTime;
+    private NumberPicker minutePicker;
+    private NumberPicker secondPicker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,8 +29,15 @@ public class AddNewRiderActivity extends ActionBarActivity {
         firstNameEditText=(EditText)findViewById(R.id.firstNameEditText);
         lastNameEditText=(EditText)findViewById(R.id.lastNameEditText);
         riderNumber=(EditText)findViewById(R.id.riderNumberEditText);
-		prTime=(EditText)findViewById(R.id.riderPRTimeEditText);
-    }
+        minutePicker=(NumberPicker)findViewById(R.id.minutePicker);
+        secondPicker=(NumberPicker)findViewById(R.id.secondPicker);
+        minutePicker.setMinValue(0);
+        minutePicker.setMaxValue(60);
+        secondPicker.setMinValue(0);
+        secondPicker.setMaxValue(60);
+        minutePicker.setValue(32);
+        secondPicker.setValue(0);
+}
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -45,31 +52,14 @@ public class AddNewRiderActivity extends ActionBarActivity {
 
         if (firstNameEditText.getText().toString().trim().length() == 0 ||
                 lastNameEditText.getText().toString().trim().length() == 0 ||
-                riderNumber.getText().toString().trim().length() == 0 ||
-                prTime.getText().toString().trim().length() == 0) {
+                riderNumber.getText().toString().trim().length() == 0) {
             showMessage("Error", "Please enter all values");
             goToManageRiders = false;
         }
-        int minutes = 0;
-        int seconds = 0;
-        long milliseconds = 0;
 
-        if (goToManageRiders) {
-            try {
-                StringTokenizer tokens = new StringTokenizer(prTime.getText().toString(), ":");
-                if (tokens.countTokens() == 2) {
-                    minutes = Integer.parseInt(tokens.nextToken());
-                    seconds = Integer.parseInt(tokens.nextToken());
-                    milliseconds = TimeUnit.MINUTES.toMillis(minutes);
-                    milliseconds += TimeUnit.SECONDS.toMillis(seconds);
-                } else {
-                    throw new NumberFormatException();
-                }
-            } catch (Exception e) {
-                showMessage("Error", "PR Time entered in an incorrect format. Use MM:SS " + e.toString());
-                goToManageRiders = false;
-            }
-        }
+        long milliseconds = 0;
+        milliseconds = TimeUnit.MINUTES.toMillis(minutePicker.getValue());
+        milliseconds += TimeUnit.SECONDS.toMillis(secondPicker.getValue());
 
         if (goToManageRiders) {
             // Inserting record

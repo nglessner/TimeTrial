@@ -31,16 +31,6 @@
         android:id="@+id/riderNumberEditText"
         android:layout_below="@+id/lastNameEditText"
         android:layout_alignParentEnd="true" />
-		
-	<EditText
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:hint="PR Time"
-        android:inputType="time"
-        android:ems="10"
-        android:id="@+id/riderPRTimeEditText"
-        android:layout_below="@+id/riderNumberEditText"
-        android:layout_alignParentEnd="true" />
 
     <Button
         android:layout_width="wrap_content"
@@ -51,23 +41,52 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 
-    <Spinner
-        android:layout_width="66dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/spinner"
-        android:spinnerMode="dropdown"
-        android:layout_below="@+id/riderPRTimeEditText"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="38dp" />
-
-    <Spinner
+    <NumberPicker
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/spinner2"
-        android:layout_alignTop="@+id/spinner"
-        android:layout_toEndOf="@+id/spinner"
-        android:layout_marginStart="50dp"
-        android:spinnerMode="dialog" />
+        android:id="@+id/minutePicker"
+        android:layout_below="@+id/riderNumberEditText"
+        android:layout_marginTop="32dp"
+        android:layout_marginStart="60dp"/>
+
+    <NumberPicker
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/secondPicker"
+        android:layout_alignTop="@+id/minutePicker"
+        android:layout_toEndOf="@+id/minutePicker" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/minutesText"
+        android:id="@+id/textView"
+        android:layout_gravity="center"
+        android:textAlignment="center"
+        android:layout_above="@+id/secondPicker"
+        android:layout_alignStart="@+id/minutePicker"
+        android:layout_alignTop="@+id/textView2"
+        android:layout_toStartOf="@+id/textView2" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/secondsText"
+        android:id="@+id/textView2"
+        android:textAlignment="center"
+        android:layout_above="@+id/secondPicker"
+        android:layout_alignStart="@+id/secondPicker"
+        android:layout_alignEnd="@+id/secondPicker" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enter course record in Min/Sec"
+        android:id="@+id/textView3"
+        android:layout_alignTop="@+id/minutePicker"
+        android:layout_alignParentStart="true"
+        android:layout_toStartOf="@+id/textView"
+        android:layout_alignBottom="@+id/minutePicker" />
 
 
 </RelativeLayout>

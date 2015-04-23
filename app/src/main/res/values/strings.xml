@@ -16,4 +16,11 @@
     <string name="StopButtonText">Stop</string>
     <string name="startEventButtonText">Start Event</string>
     <string name="addRiderButtonText">Add Rider</string>
+    <string name="minutesText">Minutes</string>
+    <string name="secondsText">Seconds</string>
+    <string name="title_activity_race_results">RaceResultsActivity</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="RiderIdMessage">com.nglessner.timetrial.riderIdMessage</string>
 </resources>

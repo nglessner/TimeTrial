@@ -9,8 +9,8 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name=".MainActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -44,11 +44,19 @@
         <activity
             android:name=".EventActivity"
             android:label="@string/title_activity_event"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".NewEventActivity" >
+            android:parentActivityName=".NewEventActivity"
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.nglessner.timetrial.NewEventActivity" />
+        </activity>
+        <activity
+            android:name=".RaceResultsActivity"
+            android:label="@string/title_activity_race_results"
+            android:parentActivityName=".ManageRidersActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.nglessner.timetrial.ManageRidersActivity" />
         </activity>
     </application>
 

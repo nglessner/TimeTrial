@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +28,16 @@ public class ManageRidersActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manage_riders);
         ListView lv = (ListView) findViewById(R.id.listView);
+
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> a, View v, int position, long id) {
+                Rider o = RiderList.get(position);
+                Intent intent = new Intent(getApplicationContext(), RaceResultsActivity.class);
+                intent.putExtra(getString(R.string.RiderIdMessage), o.RiderId);
+                startActivity(intent);
+            }
+        });
 
         loadListView(lv);
         registerForContextMenu(lv);
@@ -123,4 +134,5 @@ public class ManageRidersActivity extends ActionBarActivity {
             c.close();
         }
     }
+
 }
