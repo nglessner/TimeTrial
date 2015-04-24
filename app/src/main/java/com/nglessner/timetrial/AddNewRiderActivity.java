@@ -32,9 +32,9 @@ public class AddNewRiderActivity extends ActionBarActivity {
         minutePicker=(NumberPicker)findViewById(R.id.minutePicker);
         secondPicker=(NumberPicker)findViewById(R.id.secondPicker);
         minutePicker.setMinValue(0);
-        minutePicker.setMaxValue(60);
+        minutePicker.setMaxValue(59);
         secondPicker.setMinValue(0);
-        secondPicker.setMaxValue(60);
+        secondPicker.setMaxValue(59);
         minutePicker.setValue(32);
         secondPicker.setValue(0);
 }

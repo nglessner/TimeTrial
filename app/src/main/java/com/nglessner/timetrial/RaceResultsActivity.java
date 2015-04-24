@@ -61,10 +61,11 @@ public class RaceResultsActivity extends ActionBarActivity {
                 Race newRace = new Race();
                 newRace.RaceId = c.getInt(0);
                 newRace.RiderId = c.getInt(1);
-                newRace.StartTime = c.getInt(2);
-                newRace.EndTime = c.getInt(3);
-                newRace.Time = c.getInt(4);
-                newRace.MPH = c.getInt(5);
+                newRace.EventId = c.getInt(2);
+                newRace.StartTime = c.getInt(3);
+                newRace.EndTime = c.getInt(4);
+                newRace.Time = c.getInt(5);
+                newRace.MPH = c.getInt(6);
                 RaceList.add(newRace);
             }
             c.close();

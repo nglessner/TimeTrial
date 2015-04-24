@@ -81,7 +81,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Enter course record in Min/Sec"
+        android:text="Enter personal record in Min/Sec"
         android:id="@+id/textView3"
         android:layout_alignTop="@+id/minutePicker"
         android:layout_alignParentStart="true"
