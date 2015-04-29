@@ -37,10 +37,15 @@ public class RaceResultsActivity extends ActionBarActivity {
     {
         ArrayList<String> raceStringList = new ArrayList<>();
         StringBuilder sb = new StringBuilder();
+		int seconds = 0;
+		int minutes = 0;
 
-        for (int i = 0; i < RaceList.size(); i++) {
-            TimeUtils.formatDuration(RaceList.get(i).Time, sb);
-            String listItemString = sb.toString();
+        for (int i = 0; i < RaceList.size(); i++) {		
+			seconds = (int) Math.floor(RaceList.get(i).Time / 1000);
+			minutes = seconds / 60;
+			seconds -= minutes * 60;
+            String listItemString = String.from(minutes) + ":" + String.from(seconds);
+			//listItemString = listItemString + " on " + 
             raceStringList.add(listItemString);
         }
 

@@ -7,10 +7,10 @@
     <string name="FirstNameString">First Name</string>
     <string name="LastNameString">Last Name</string>
     <string name="AddNewRiderString">Add New Rider</string>
-    <string name="BeepBtnText">Beep!</string>
+    <string name="BeepBtnText">Start Gate Beeps</string>
     <string name="riderNumber">Rider Number</string>
     <string name="AddNewRider">Add New Rider</string>
-    <string name="title_activity_event">EventActivity</string>
+    <string name="title_activity_event">Event</string>
     <string name="initialTimeZero">00:00:00</string>
     <string name="StartButtonText">Start</string>
     <string name="StopButtonText">Stop</string>
@@ -18,7 +18,7 @@
     <string name="addRiderButtonText">Add Rider</string>
     <string name="minutesText">Minutes</string>
     <string name="secondsText">Seconds</string>
-    <string name="title_activity_race_results">RaceResultsActivity</string>
+    <string name="title_activity_race_results">Race Results</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
