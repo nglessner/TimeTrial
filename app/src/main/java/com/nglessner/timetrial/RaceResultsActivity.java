@@ -47,10 +47,9 @@ public class RaceResultsActivity extends ActionBarActivity {
                 result = "PR: ";
             }
             result = result + String.valueOf(new DateFormat().format("mm:ss", new Date(ms)));
-            double s = ((double)ms) / 1000;
-            double h = s/3600;
-            double d = 10.85/h;
-            result += " " + String.format("%.2f", d) + "MPH";
+            double h = ((double)ms) /3600000;
+            double speed = 10.85/h;
+            result += " " + String.format("%.2f", speed) + "MPH";
 
             raceStringList.add(result);
         }

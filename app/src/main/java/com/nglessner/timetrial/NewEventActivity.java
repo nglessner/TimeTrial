@@ -17,6 +17,13 @@ public class NewEventActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_event);
+		
+		//create new event
+		//get event id
+		//select riders tied to this event (through the race table)
+			//Select * from rider r join race ra on ra.riderId = r.riderId where
+			//ra.eventId = @eventId
+		//display list of those riders		
 
         ArrayList<String> riderStringList = new ArrayList<>();
 
@@ -44,4 +51,15 @@ public class NewEventActivity extends ActionBarActivity {
         Intent intent = new Intent(this, EventActivity.class);
         startActivity(intent);
     }
+	
+	void addRiderToEventDialog(View view) {
+		// show list of riders
+		// on selecting a rider... call different method
+	}
+	
+	void addRiderToEvent(View view) {		
+		// on selecting a rider... 
+		// add new race row with this rider id and eventId
+		// 
+	}
 }
