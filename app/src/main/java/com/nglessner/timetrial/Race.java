@@ -6,6 +6,7 @@ package com.nglessner.timetrial;
 public class Race {
     public int RaceId;
     public int RiderId;
+    public int EventId;
     public int StartTime;
     public int EndTime;
     public long Time;

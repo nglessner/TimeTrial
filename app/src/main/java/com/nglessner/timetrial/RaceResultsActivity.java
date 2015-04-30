@@ -5,12 +5,14 @@ import android.database.Cursor;
 import android.support.v4.util.TimeUtils;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.text.format.DateFormat;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -36,17 +38,21 @@ public class RaceResultsActivity extends ActionBarActivity {
     private void loadListView(ListView lv)
     {
         ArrayList<String> raceStringList = new ArrayList<>();
-        StringBuilder sb = new StringBuilder();
-		int seconds = 0;
-		int minutes = 0;
 
-        for (int i = 0; i < RaceList.size(); i++) {		
-			seconds = (int) Math.floor(RaceList.get(i).Time / 1000);
-			minutes = seconds / 60;
-			seconds -= minutes * 60;
-            String listItemString = String.from(minutes) + ":" + String.from(seconds);
-			//listItemString = listItemString + " on " + 
-            raceStringList.add(listItemString);
+        for (int i = 0; i < RaceList.size(); i++) {
+            String result = "";
+            long ms = RaceList.get(i).Time;
+            if (i == 0)
+            {
+                result = "PR: ";
+            }
+            result = result + String.valueOf(new DateFormat().format("mm:ss", new Date(ms)));
+            double s = ((double)ms) / 1000;
+            double h = s/3600;
+            double d = 10.85/h;
+            result += " " + String.format("%.2f", d) + "MPH";
+
+            raceStringList.add(result);
         }
 
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
@@ -60,7 +66,7 @@ public class RaceResultsActivity extends ActionBarActivity {
     private void populateRaceList(int riderId) {
         if (RaceList == null || RaceList.size() == 0) {
             RaceList = new ArrayList<Race>();
-            Cursor c = MainActivity.db.rawQuery("Select * from Race WHERE RiderId = " + riderId, null);
+            Cursor c = MainActivity.db.rawQuery("Select * from Race WHERE RiderId = " + riderId + " ORDER BY RaceTime DESC", null);
 
             while (c.moveToNext()) {
                 Race newRace = new Race();
