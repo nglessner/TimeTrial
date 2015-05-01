@@ -37,6 +37,8 @@ public class AddNewRiderActivity extends ActionBarActivity {
         secondPicker.setMaxValue(59);
         minutePicker.setValue(32);
         secondPicker.setValue(0);
+        minutePicker.setDescendantFocusability(NumberPicker.FOCUS_BLOCK_DESCENDANTS);
+        secondPicker.setDescendantFocusability(NumberPicker.FOCUS_BLOCK_DESCENDANTS);
 }
 
     @Override
@@ -75,7 +77,7 @@ public class AddNewRiderActivity extends ActionBarActivity {
 
                 MainActivity.db.execSQL("INSERT INTO Race VALUES((SELECT MAX(RaceId)+ 1 from Race),"
                         + riderId + "," + null + "," + null + "," + null + "," + milliseconds
-                        + "," + null + ");");
+                        + ");");
 
             } catch (Exception e) {
                 showMessage("Error", "There was an error adding this rider, please try again. " + e.toString());

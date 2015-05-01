@@ -75,7 +75,6 @@ public class RaceResultsActivity extends ActionBarActivity {
                 newRace.StartTime = c.getInt(3);
                 newRace.EndTime = c.getInt(4);
                 newRace.Time = c.getInt(5);
-                newRace.MPH = c.getInt(6);
                 RaceList.add(newRace);
             }
             c.close();

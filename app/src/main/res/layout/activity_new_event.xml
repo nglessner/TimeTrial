@@ -20,7 +20,8 @@
         android:text="@string/addRiderButtonText"
         android:id="@+id/addRiderToEvent"
         android:layout_alignTop="@+id/startEventButton"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:onClick="addRiderToEventDialog" />
 
     <ListView
         android:layout_width="wrap_content"

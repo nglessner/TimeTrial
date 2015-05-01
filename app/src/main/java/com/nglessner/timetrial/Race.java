@@ -10,5 +10,4 @@ public class Race {
     public int StartTime;
     public int EndTime;
     public long Time;
-    public int MPH;
 }
