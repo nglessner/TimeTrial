@@ -2,6 +2,7 @@ package com.nglessner.timetrial;
 
 import android.os.CountDownTimer;
 import android.os.Handler;
+import android.os.SystemClock;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -42,7 +43,7 @@ public class EventActivity extends ActionBarActivity {
         return true;
     }
 
-/*    private Runnable updateTimerThread = new Runnable() {
+    private Runnable updateTimerThread = new Runnable() {
 
         public void run() {
 
@@ -60,34 +61,34 @@ public class EventActivity extends ActionBarActivity {
             customHandler.postDelayed(this, 0);
         }
 
-    };*/
+    };
 
     public void countDownStart(View view) {
-        //startTime = SystemClock.uptimeMillis();
-        //customHandler.postDelayed(updateTimerThread, 0);
+        startTime = SystemClock.uptimeMillis();
+        customHandler.postDelayed(updateTimerThread, 0);
 
         timerValue=(TextView)findViewById(R.id.countDownText);
 
-        new CountDownTimer(15000, 1000) { // adjust the milli seconds here
+/*        new CountDownTimer(15000, 1000) { // adjust the milli seconds here
             public void onTick(long millisUntilFinished) {
                 timerValue.setText("seconds remaining: " + millisUntilFinished / 1000);
 
-/*                timerValue.setText(""+String.format(FORMAT,
+*//*                timerValue.setText(""+String.format(FORMAT,
                         TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished) - TimeUnit.HOURS.toMinutes(
                                 TimeUnit.MILLISECONDS.toHours(millisUntilFinished)),
                         TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) - TimeUnit.MINUTES.toSeconds(
                                 TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished)),
-                                millisUntilFinished - TimeUnit.SECONDS.toSeconds(millisUntilFinished)));*/
+                                millisUntilFinished - TimeUnit.SECONDS.toSeconds(millisUntilFinished)));*//*
             }
 
             public void onFinish() {
                 timerValue.setText("done!");
             }
-        }.start();
+        }.start();*/
     }
 
     public void countDownStop(View view) {
-        //timeSwapBuff += timeInMilliseconds;
-        //customHandler.removeCallbacks(updateTimerThread);
+        timeSwapBuff += timeInMilliseconds;
+        customHandler.removeCallbacks(updateTimerThread);
     }
 }

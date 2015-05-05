@@ -17,34 +17,44 @@ import java.util.List;
 
 public class NewEventActivity extends ActionBarActivity {
 
-    private ArrayList<Rider> RiderList;
     private ArrayList<Rider> AllRidersList;
-    private int EventId;
+    private Event CurrentEvent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_event);
+        this.CurrentEvent = new Event();
 
         Cursor c = MainActivity.db.rawQuery("SELECT MAX(EventId)+ 1 from Event", null);
         c.moveToFirst();
-        EventId = c.getInt(0);
+        this.CurrentEvent.EventId = c.getInt(0);
         c.close();
-
-        MainActivity.db.execSQL("INSERT INTO Event VALUES(" + EventId + ","
-                + "10.85" + ",'" + "New City Time Trial" + "');");
 
         showRiderList();
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        // delete all riders that do not have a start time
+        MainActivity.db.execSQL("delete from race where EventId = @0 and startTime is null", new Object[] { this.CurrentEvent.EventId });
+
+
+        // set the stop time for all riders that have a start time but not a stop time
+        // calculate and store durations for all riders with start and stop times
+        //
+    }
+
     private void showRiderList()
     {
-        this.populateRiderList(EventId);
+        this.populateRiderList(this.CurrentEvent.EventId);
 
         ArrayList<String> riderStringList = new ArrayList<>();
 
-        for (int i = 0; i < RiderList.size(); i++) {
-            riderStringList.add(RiderList.get(i).toString());
+        for (int i = 0; i < this.CurrentEvent.Riders.size(); i++) {
+            riderStringList.add(this.CurrentEvent.Riders.get(i).toString());
         }
 
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
@@ -57,21 +67,19 @@ public class NewEventActivity extends ActionBarActivity {
     }
 
     private void populateRiderList(int eventId) {
-        if (RiderList == null || RiderList.size() == 0) {
-            RiderList = new ArrayList<>();
-            Cursor c = MainActivity.db.rawQuery("Select * from rider r join race ra on ra.riderId = r.riderId where ra.eventId = "
-                    + eventId + " ORDER BY ra.RaceTime DESC", null);
+        this.CurrentEvent.Riders = new ArrayList<>();
+        Cursor c = MainActivity.db.rawQuery("Select * from rider r join race ra on ra.riderId = r.riderId where ra.eventId = "
+                + eventId + " ORDER BY ra.RaceTime DESC", null);
 
-            while (c.moveToNext()) {
-                Rider newRider = new Rider();
-                newRider.RiderId = c.getInt(0);
-                newRider.RiderNumber = c.getInt(1);
-                newRider.FirstName = c.getString(2);
-                newRider.LastName = c.getString(3);
-                RiderList.add(newRider);
-            }
-            c.close();
+        while (c.moveToNext()) {
+            Rider newRider = new Rider();
+            newRider.RiderId = c.getInt(0);
+            newRider.RiderNumber = c.getInt(1);
+            newRider.FirstName = c.getString(2);
+            newRider.LastName = c.getString(3);
+            this.CurrentEvent.Riders.add(newRider);
         }
+        c.close();
     }
 
     private void populateAllRidersList() {
@@ -111,7 +119,7 @@ public class NewEventActivity extends ActionBarActivity {
 
         //RaceId`	INTEGER, `RiderId` INTEGER NOT NULL, `EventId` INTEGER, `StartTime` INTEGER, `EndTime` INTEGER,`RaceTime` INTEGER
         MainActivity.db.execSQL("INSERT INTO Race VALUES(" + raceId + "," + riderId + ","
-                + EventId + "," + null + "," + null + "," + null + ");");
+                + this.CurrentEvent.EventId + "," + null + "," + null + "," + null + ");");
 
         showRiderList();
 	}

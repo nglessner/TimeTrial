@@ -8,6 +8,7 @@ public class Rider {
     public int RiderNumber;
     public String FirstName;
     public String LastName;
+    public Race CurrentRace;
 
     public String toString()
     {
